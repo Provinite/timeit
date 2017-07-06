@@ -8,14 +8,23 @@ import { TimerService } from './timer.service';
     providers: [TimerService]
 })
 export class TimerComponent implements OnInit {
-    runtime: number = 0;
+    runtime: number[] = [0,0,0,0];
+    private divClass = "callout warning";
 
     ngOnInit(): void {
       let component = this;
       this.timerService.start();
       setInterval(() => {
-          component.runtime = component.timerService.getTime() / 1000;
+          component.runtime = component.timerService.read();
       }, 10);
+      
+      this.timerService.state$.subscribe((state) => {
+          if (state == true) {
+              this.divClass = "callout success";
+          } else {
+              this.divClass = "callout warning";
+          }
+      })
     }
 
     toggle(): void {
@@ -30,5 +39,5 @@ export class TimerComponent implements OnInit {
         this.timerService.start();
     }
 
-    constructor(private timerService: TimerService) { };
+    constructor(public timerService: TimerService) { };
 }

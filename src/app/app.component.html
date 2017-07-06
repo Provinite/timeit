@@ -1,5 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="row">
-    <timer></timer>
-    <timer></timer>
+    <div class="small-6 medium-4 column" *ngFor="let timer of timers">
+        <timer (click)="clk(timer)"></timer>
+    </div>
 </div>

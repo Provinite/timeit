@@ -1,27 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { TimerService } from './timer.service';
+import { Component, OnInit, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { TimerComponent } from './timer.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [TimerService]
 })
 export class AppComponent implements OnInit {
   title: string = 'App';
   runtime: number = 0;
-
+  timers = [0,1,2,3,4,5,6,7,8];
+  @ViewChildren(TimerComponent) timerComponents: QueryList<TimerComponent>;
+  
   ngOnInit(): void {
-      let component = this;
-      this.timerService.start();
-      setInterval(() => {
-          component.runtime = component.timerService.getTime() / 1000;
-      }, 10);
   }
-
-  toggle(): void {
-      this.timerService.toggle();
+  
+  clk(e): void {
+      const components = this.timerComponents.toArray();
+      components[e].toggle();
+      const newState = components[e].timerService.isRunning();
+      //we started a timer. stop the others
+      if (newState) {
+          for (let c of components) {
+              if (c != components[e])
+                c.stop();
+          }
+      }
   }
-
-  constructor(private timerService: TimerService) { };
+  
+  ngAfterViewInit(): void {
+      console.log(this.timerComponents);
+      this.timerComponents.map((t) => t.stop());
+      this.timerComponents.first.start();
+  }
 }
