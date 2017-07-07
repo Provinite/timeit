@@ -8,22 +8,22 @@ import { TimerService } from './timer.service';
     providers: [TimerService]
 })
 export class TimerComponent implements OnInit {
-    runtime: number[] = [0,0,0,0];
+    runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
-    private divClass = "callout warning";
+    private divClass = 'callout warning';
 
     ngOnInit(): void {
-      let component = this;
+      const component = this;
       setInterval(() => {
           component.runtime = component.timerService.read();
-          component.fractionalHours = (component.timerService.getTime()/1000) / 3600;
+          component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
       }, 10);
-      
+
       this.timerService.state$.subscribe((state) => {
-          if (state == true) {
-              this.divClass = "callout success";
+          if (state === true) {
+              this.divClass = 'callout success';
           } else {
-              this.divClass = "callout warning";
+              this.divClass = 'callout warning';
           }
       })
     }
