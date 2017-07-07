@@ -1,6 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="row">
     <div class="small-6 medium-4 column" *ngFor="let timer of timers">
-        <timer (click)="clk(timer)"></timer>
+        <app-timer (click)="clk(timer)"></app-timer>
+    </div>
+    <div (click)="clkAddTimer()" class="small-6 medium-4 column add-timer end">
+        <div class="callout">
+            <div class="plus-sign"></div>
+        </div>
     </div>
 </div>

@@ -5,14 +5,14 @@ import { AppComponent } from './app.component';
 import { TimerComponent } from './timer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TimerComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        TimerComponent
+    ],
+    imports: [
+        BrowserModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
