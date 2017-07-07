@@ -28,6 +28,11 @@ export class AppComponent implements OnInit {
       }
   }
   
+  clkAddTimer(): void {
+      const maxTimer = this.timers.length;
+      this.timers.push(maxTimer);
+  }
+  
   ngAfterViewInit(): void {
       console.log(this.timerComponents);
       this.timerComponents.map((t) => t.stop());

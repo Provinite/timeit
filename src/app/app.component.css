@@ -1,3 +1,27 @@
 timer {
     cursor: pointer;
 }
+div.plus-sign {
+    position:relative;
+    height:150px;
+}
+div.plus-sign::before {
+    content: '+';
+    font-size:10rem;
+    text-align:center;
+    color:#CCC;
+    display:block;
+    height:150px;
+    line-height:150px;
+}
+div.add-timer .callout {
+    background-color:#777;
+    height:250px;
+    cursor:pointer;
+}
+div.add-timer span {
+    color:#CCC;
+    font-size:2rem;
+    display:block;
+    text-align:center;
+}
