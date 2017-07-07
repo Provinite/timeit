@@ -14,7 +14,6 @@ export class TimerComponent implements OnInit {
 
     ngOnInit(): void {
       let component = this;
-      this.timerService.start();
       setInterval(() => {
           component.runtime = component.timerService.read();
           component.fractionalHours = (component.timerService.getTime()/1000) / 3600;
