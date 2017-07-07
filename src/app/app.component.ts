@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
   }
   
   ngAfterViewInit(): void {
-      console.log(this.timerComponents);
       this.timerComponents.map((t) => t.stop());
   }
 }
