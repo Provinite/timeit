@@ -13,23 +13,23 @@ export class TimerComponent implements OnInit {
     private divClass = 'callout warning';
 
     ngOnInit(): void {
-      const component = this;
-      setInterval(() => {
-          component.runtime = component.timerService.read();
-          component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
-      }, 10);
+        const component = this;
+        setInterval(() => {
+            component.runtime = component.timerService.read();
+            component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
+        }, 10);
 
-      this.timerService.state$.subscribe((state) => {
-          if (state === true) {
-              this.divClass = 'callout success';
-          } else {
-              this.divClass = 'callout warning';
-          }
-      })
+        this.timerService.state$.subscribe((state) => {
+            if (state === true) {
+                this.divClass = 'callout success';
+            } else {
+                this.divClass = 'callout warning';
+            }
+        })
     }
 
     toggle(): void {
-      this.timerService.toggle();
+        this.timerService.toggle();
     }
 
     stop(): void {
