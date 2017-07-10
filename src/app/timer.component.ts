@@ -10,7 +10,7 @@ import { TimerService } from './timer.service';
 export class TimerComponent implements OnInit {
     runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
-    private divClass = 'callout warning';
+    public divClass = 'callout warning';
 
     ngOnInit(): void {
         const component = this;
