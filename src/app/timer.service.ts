@@ -9,11 +9,11 @@ export class TimerService {
     private accumulatedTime = 0;
     private stateSource = new Subject<boolean>();
     state$ = this.stateSource.asObservable();
-    
+
     constructor(private timeSource: TimeSourceService) {
-        
+
     }
-    
+
     public reset(): void {
         this.running = false;
         this.accumulatedTime = 0;

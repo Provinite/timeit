@@ -5,7 +5,7 @@ export class TimeSourceService {
     currentTimeMillis(): number {
         return (+ new Date());
     }
-    
+
     currentDate(): Date {
         return new Date();
     }
