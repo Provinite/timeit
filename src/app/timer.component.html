@@ -1,4 +1,5 @@
 <div [class]="divClass + ' timer'">
+    <input type="text" />
     <div class="timerclock">
         {{runtime[0]}}H {{runtime[1]}}M {{runtime[2] | number:'2.0-0'}}.{{runtime[3] | number:'2.0-0'}}S ({{fractionalHours | number:'1.2-2'}}H)
     </div>

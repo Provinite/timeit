@@ -14,7 +14,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
     }
 
-    clk(e): void {
+    clk(e: number, event: MouseEvent): void {
+        if (event.toElement.tagName.toLowerCase() === 'input') { return; };
         const components = this.timerComponents.toArray();
         components[e].toggle();
         const newState = components[e].timerService.isRunning();
