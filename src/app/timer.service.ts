@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { TimeSourceService } from './time-source.service';
 
 @Injectable()
 export class TimerService {
-    private initTime: Date;
+    private initTime: number;
     private running = false;
     private accumulatedTime = 0;
     private stateSource = new Subject<boolean>();
     state$ = this.stateSource.asObservable();
-
+    
+    constructor(private timeSource: TimeSourceService) {
+        
+    }
+    
     public reset(): void {
         this.running = false;
         this.accumulatedTime = 0;
-        this.initTime = new Date();
+        this.initTime = this.timeSource.currentTimeMillis();
         this.stateSource.next(false);
     }
 
     public start(): void {
         if (this.isRunning()) { return };
         this.running = true;
-        this.initTime = new Date();
+        this.initTime = this.timeSource.currentTimeMillis();
         this.stateSource.next(true);
     }
 
@@ -81,7 +86,7 @@ export class TimerService {
     }
 
     private getSegmentRunningTime(): number {
-        return (+ new Date()) - (+ this.initTime);
+        return this.timeSource.currentTimeMillis() - this.initTime;
     }
 
     private getTotalRunningTime(): number {

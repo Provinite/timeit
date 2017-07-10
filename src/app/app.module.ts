@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TimerComponent } from './timer.component';
 
+import { TimeSourceService } from './time-source.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -12,7 +14,9 @@ import { TimerComponent } from './timer.component';
     imports: [
         BrowserModule
     ],
-    providers: [],
+    providers: [
+        TimeSourceService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
