@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
 import { TimerService } from './timer.service';
 
 @Component({
@@ -7,18 +7,19 @@ import { TimerService } from './timer.service';
     styleUrls: ['./timer.component.css'],
     providers: [TimerService]
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnDestroy {
     @Input() showCloseButton = false;
 
     runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
     public divClass = 'callout warning';
+    private interval: number;
 
     @Output() onClose: EventEmitter<any> = new EventEmitter();
 
     ngOnInit(): void {
         const component = this;
-        setInterval(() => {
+        this.interval = window.setInterval(() => {
             component.runtime = component.timerService.read();
             component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
         }, 10);
@@ -30,6 +31,10 @@ export class TimerComponent implements OnInit {
                 this.divClass = 'callout warning';
             }
         })
+    }
+
+    ngOnDestroy(): void {
+        window.clearInterval(this.interval);
     }
 
     close(): void {
