@@ -13,28 +13,42 @@ export class TimerComponent implements OnInit, OnDestroy {
     runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
     public divClass = 'callout warning';
-    private interval: number;
+    private interval: number = null;
 
     @Output() onClose: EventEmitter<any> = new EventEmitter();
 
     ngOnInit(): void {
-        const component = this;
-        this.interval = window.setInterval(() => {
-            component.runtime = component.timerService.read();
-            component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
-        }, 10);
-
         this.timerService.state$.subscribe((state) => {
             if (state === true) {
                 this.divClass = 'callout success';
+                this.startInterval();
             } else {
                 this.divClass = 'callout warning';
+                this.stopInterval();
             }
         })
     }
 
-    ngOnDestroy(): void {
+    private startInterval(): void {
+        if (this.interval !== null) { return; }
+
+        this.interval = window.setInterval(this.updateDisplay.bind(this), 10);
+    }
+
+    private stopInterval(): void {
+        if (this.interval === null) { return; }
+
         window.clearInterval(this.interval);
+        this.interval = null;
+    }
+
+    private updateDisplay(): void {
+        this.runtime = this.timerService.read();
+        this.fractionalHours = (this.timerService.getTime() / 1000) / 3600;
+    }
+
+    ngOnDestroy(): void {
+        this.stopInterval();
     }
 
     close(): void {
