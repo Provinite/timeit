@@ -9,28 +9,33 @@ import { TimerComponent } from './timer.component';
 export class AppComponent implements OnInit, AfterViewInit {
     title = 'App';
     timers = [0];
+    private maxTimer = 0;
     @ViewChildren(TimerComponent) timerComponents: QueryList<TimerComponent>;
 
     ngOnInit(): void {
     }
 
-    clk(e): void {
+    toggled(e: number, event): void {
+        const idx = this.timers.indexOf(e);
         const components = this.timerComponents.toArray();
-        components[e].toggle();
-        const newState = components[e].timerService.isRunning();
+        const newState = event.isRunning;
         // we started a timer. stop the others
         if (newState) {
             for (const c of components) {
-                if (c !== components[e]) {
+                if (c !== components[idx]) {
                     c.stop();
                 }
             }
         }
     }
 
+    doClose(timer: number): void {
+        const idx = this.timers.indexOf(timer);
+        this.timers.splice(idx, 1);
+    }
+
     clkAddTimer(): void {
-        const maxTimer = this.timers.length;
-        this.timers.push(maxTimer);
+        this.timers.push(++this.maxTimer);
     }
 
     ngAfterViewInit(): void {

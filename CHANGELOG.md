@@ -1,3 +1,12 @@
+## v0.2.0 (07/11/2017)
+- Adds an editable title to timers. [GH-9]
+- Adds TimeSource service to improve testability of TimerService. [GH-8]
+- Fixes build error related to template variable member visibility. [GH-12]
+- Adds close buttons to Timers. [GH-13]
+- Cleans up leftover intervals for Timers when they are removed. [GH-16] 
+- Stops tracking time changes when Timers are not running. [GH-4]
+- Adds onToggle event to Timers. [GH-14]
+
 ## v0.1.0 (07/7/2017)
 - Changes timer selector to app-timer per NG style guide. [GH-7]
 - Beautifies src/app directory. Updates editorconfig and tslint to 4 space indentations. [GH-6]

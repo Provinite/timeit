@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { TimerService } from './timer.service';
 
 @Component({
@@ -7,25 +7,59 @@ import { TimerService } from './timer.service';
     styleUrls: ['./timer.component.css'],
     providers: [TimerService]
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnDestroy {
+    @Input() showCloseButton = false;
+
     runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
-    private divClass = 'callout warning';
+    public divClass = 'callout warning';
+    private interval: number = null;
+
+    @Output() onClose: EventEmitter<any> = new EventEmitter();
+    @Output() onToggle: EventEmitter<{isRunning: boolean}> = new EventEmitter();
+
+    @HostListener('click', ['$event']) click(event: MouseEvent) {
+        if (event.toElement.tagName.toLowerCase() === 'input' || event.toElement.tagName.toLowerCase() === 'a') { return true; };
+        this.toggle();
+        this.onToggle.emit({isRunning: this.timerService.isRunning()});
+    }
 
     ngOnInit(): void {
-        const component = this;
-        setInterval(() => {
-            component.runtime = component.timerService.read();
-            component.fractionalHours = (component.timerService.getTime() / 1000) / 3600;
-        }, 10);
-
         this.timerService.state$.subscribe((state) => {
             if (state === true) {
                 this.divClass = 'callout success';
+                this.startInterval();
             } else {
                 this.divClass = 'callout warning';
+                this.stopInterval();
             }
         })
+    }
+
+    private startInterval(): void {
+        if (this.interval !== null) { return; }
+
+        this.interval = window.setInterval(this.updateDisplay.bind(this), 10);
+    }
+
+    private stopInterval(): void {
+        if (this.interval === null) { return; }
+
+        window.clearInterval(this.interval);
+        this.interval = null;
+    }
+
+    private updateDisplay(): void {
+        this.runtime = this.timerService.read();
+        this.fractionalHours = (this.timerService.getTime() / 1000) / 3600;
+    }
+
+    ngOnDestroy(): void {
+        this.stopInterval();
+    }
+
+    close(): void {
+        this.onClose.emit();
     }
 
     toggle(): void {

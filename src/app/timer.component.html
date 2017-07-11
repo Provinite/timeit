@@ -1,4 +1,15 @@
 <div [class]="divClass + ' timer'">
+    <a 
+        *ngIf="showCloseButton" 
+        class="timer-close-button" 
+        (click)="close()">
+        &times;
+    </a>
+    <div class="row">
+        <div class="small-12 column">
+            <input type="text" />
+        </div>
+    </div>
     <div class="timerclock">
         {{runtime[0]}}H {{runtime[1]}}M {{runtime[2] | number:'2.0-0'}}.{{runtime[3] | number:'2.0-0'}}S ({{fractionalHours | number:'1.2-2'}}H)
     </div>
