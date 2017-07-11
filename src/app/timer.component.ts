@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { TimerService } from './timer.service';
 
 @Component({
@@ -16,6 +16,13 @@ export class TimerComponent implements OnInit, OnDestroy {
     private interval: number = null;
 
     @Output() onClose: EventEmitter<any> = new EventEmitter();
+    @Output() onToggle: EventEmitter<{isRunning: boolean}> = new EventEmitter();
+
+    @HostListener('click', ['$event']) click(event: MouseEvent) {
+        if (event.toElement.tagName.toLowerCase() === 'input' || event.toElement.tagName.toLowerCase() === 'a') { return true; };
+        this.toggle();
+        this.onToggle.emit({isRunning: this.timerService.isRunning()});
+    }
 
     ngOnInit(): void {
         this.timerService.state$.subscribe((state) => {

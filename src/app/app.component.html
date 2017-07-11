@@ -2,9 +2,9 @@
 <div class="row">
     <div class="small-6 medium-4 column" *ngFor="let timer of timers">
         <app-timer 
-            (click)="clk(timer, $event)" 
             [showCloseButton]="true"
-            (onClose)="doClose(timer)">
+            (onClose)="doClose(timer)"
+            (onToggle)="toggled(timer, $event)">
         </app-timer>
     </div>
     <div (click)="clkAddTimer()" class="small-6 medium-4 column add-timer end">

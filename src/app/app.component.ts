@@ -15,12 +15,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
     }
 
-    clk(e: number, event: MouseEvent): boolean {
-        if (event.toElement.tagName.toLowerCase() === 'input' || event.toElement.tagName.toLowerCase() === 'a') { return true; };
+    toggled(e: number, event): void {
         const idx = this.timers.indexOf(e);
         const components = this.timerComponents.toArray();
-        components[idx].toggle();
-        const newState = components[idx].timerService.isRunning();
+        const newState = event.isRunning;
         // we started a timer. stop the others
         if (newState) {
             for (const c of components) {
