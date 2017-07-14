@@ -4,7 +4,7 @@ import { TimerService } from './timer.service';
 export class TimerData {
     name: string;
     time: number;
-    constructor(name = "", time = 0) {
+    constructor(name = '', time = 0) {
         this.name = name;
         this.time = time;
     }
@@ -70,19 +70,19 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.runtime = this.timerService.read();
         this.fractionalHours = (this.timerService.getTime() / 1000) / 3600;
     }
-    
+
     public getTime(): number {
         return this.timerService.getTime();
     }
-    
+
     public getName(): string {
         return this.name;
     }
-    
+
     public export(): TimerData {
         return new TimerData(this.name, this.getTime());
     }
-    
+
     public import(timerData: TimerData): void {
         this.name = timerData.name;
         this.timerService.init(timerData.time);
@@ -110,5 +110,5 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     constructor(public timerService: TimerService) { };
-    
+
 }
