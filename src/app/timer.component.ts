@@ -1,6 +1,16 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { TimerService } from './timer.service';
 
+export class TimerData {
+    name: string;
+    time: number;
+    constructor(name = "", time = 0) {
+        this.name = name;
+        this.time = time;
+    }
+}
+
+
 @Component({
     selector: 'app-timer',
     templateUrl: './timer.component.html',
@@ -9,6 +19,8 @@ import { TimerService } from './timer.service';
 })
 export class TimerComponent implements OnInit, OnDestroy {
     @Input() showCloseButton = false;
+    @Input() name = '';
+    @Input() elapsedTime = 0;
 
     runtime: number[] = [0, 0, 0, 0];
     fractionalHours = 0;
@@ -33,7 +45,12 @@ export class TimerComponent implements OnInit, OnDestroy {
                 this.divClass = 'callout warning';
                 this.stopInterval();
             }
-        })
+        });
+
+        // make sure to force elapsedTime to a numeric type
+        this.elapsedTime = parseInt(this.elapsedTime.toString(), 10);
+        this.timerService.init(this.elapsedTime);
+        this.updateDisplay();
     }
 
     private startInterval(): void {
@@ -52,6 +69,24 @@ export class TimerComponent implements OnInit, OnDestroy {
     private updateDisplay(): void {
         this.runtime = this.timerService.read();
         this.fractionalHours = (this.timerService.getTime() / 1000) / 3600;
+    }
+    
+    public getTime(): number {
+        return this.timerService.getTime();
+    }
+    
+    public getName(): string {
+        return this.name;
+    }
+    
+    public export(): TimerData {
+        return new TimerData(this.name, this.getTime());
+    }
+    
+    public import(timerData: TimerData): void {
+        this.name = timerData.name;
+        this.timerService.init(timerData.time);
+        this.updateDisplay();
     }
 
     ngOnDestroy(): void {
@@ -75,4 +110,5 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     constructor(public timerService: TimerService) { };
+    
 }
