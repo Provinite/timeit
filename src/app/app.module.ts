@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgModule, InjectionToken } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TimerComponent } from './timer.component';
 
 import { TimeSourceService } from './time-source.service';
+import { TimerDataStorageService } from './timer-data-storage.service';
+import { LocalStorageService } from './local-storage.service';
 
 @NgModule({
     declarations: [
@@ -12,10 +15,13 @@ import { TimeSourceService } from './time-source.service';
         TimerComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        FormsModule
     ],
     providers: [
-        TimeSourceService
+        TimeSourceService,
+        LocalStorageService,
+        TimerDataStorageService
     ],
     bootstrap: [AppComponent]
 })

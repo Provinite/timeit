@@ -56,7 +56,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     private startInterval(): void {
         if (this.interval !== null) { return; }
 
-        this.interval = window.setInterval(this.updateDisplay.bind(this), 10);
+        this.interval = window.setInterval(this.updateDisplay.bind(this), 45);
     }
 
     private stopInterval(): void {
