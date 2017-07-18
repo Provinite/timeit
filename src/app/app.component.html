@@ -3,8 +3,10 @@
     <div class="small-6 medium-4 column" *ngFor="let timer of timers">
         <app-timer 
             [showCloseButton]="true"
-            (onClose)="doClose(timer)"
-            (onToggle)="toggled(timer, $event)">
+            (onClose)="doClose(timer.id)"
+            (onToggle)="toggled(timer.id, $event)"
+            [name]="timer.data.name"
+            [elapsedTime]="timer.data.time">
         </app-timer>
     </div>
     <div (click)="clkAddTimer()" class="small-6 medium-4 column add-timer end">

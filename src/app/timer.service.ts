@@ -11,7 +11,6 @@ export class TimerService {
     state$ = this.stateSource.asObservable();
 
     constructor(private timeSource: TimeSourceService) {
-
     }
 
     public reset(): void {
@@ -52,6 +51,12 @@ export class TimerService {
             return this.accumulatedTime;
         }
         return this.getTotalRunningTime();
+    }
+
+    public init(time: number) {
+        this.reset();
+        this.accumulatedTime = time;
+        this.initTime = this.timeSource.currentTimeMillis();
     }
 
     public read(): number[] {

@@ -1,3 +1,9 @@
+## v0.3.0 (07/18/2017
+- Implements timer autosave/load (autosave every 30 seconds, and on close) [GH-19]
+- Adds TimerDataStorageService [GH-18]
+- Adds LocalStorage service [GH-17]
+- Adds functionality for timer save/load [GH-11]
+
 ## v0.2.0 (07/11/2017)
 - Adds an editable title to timers. [GH-9]
 - Adds TimeSource service to improve testability of TimerService. [GH-8]
