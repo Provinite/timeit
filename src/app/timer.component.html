@@ -5,12 +5,11 @@
         (click)="close()">
         &times;
     </a>
-    <div class="row">
-        <div class="small-12 column">
-            <input type="text" [(ngModel)]="name" />
-        </div>
-    </div>
+    <input type="text" [(ngModel)]="name" />
     <div class="timerclock">
-        {{runtime[0]}}H {{runtime[1]}}M {{runtime[2] | number:'2.0-0'}}.{{runtime[3] | number:'2.0-0'}}S ({{fractionalHours | number:'1.2-2'}}H)
+        <span class="digits">{{runtime[0]}}</span><span class="unit">H</span>
+        <span class="digits">{{runtime[1]}}</span><span class="unit">M</span>
+        <span class="digits">{{runtime[2] | number:'2.0-0'}}.{{runtime[3] | number:'2.0-0'}}</span><span class="unit">S</span> 
+        <span class="fractional-hours">({{fractionalHours | number:'1.2-2'}}H)</span>
     </div>
 </div>

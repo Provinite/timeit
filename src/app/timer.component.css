@@ -6,15 +6,27 @@
     position: absolute;
     bottom: 0;
     display: inline-block;
-    max-width: 200px;
+    width: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    font-family: "Lucida Console", "Lucida Sans Typewriter", "Consolas", monospace;
 }
 
 input {
     text-align: center;
-    border-radius:5px;
+    font-size:0.9rem;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top:3rem;
+    border-left: 0;
+    border-right: 0;
+}
+
+input:focus {
+    border-left: 0;
+    border-right: 0;
 }
 
 .timer-close-button {
@@ -29,4 +41,8 @@ input {
 
 .timer-close-button:hover {
     color:#000000;
+}
+
+.timerclock .digits {
+    font-size:2.0rem;
 }
