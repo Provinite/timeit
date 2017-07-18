@@ -1,4 +1,4 @@
-# TimeIT v0.2.0
+# TimeIT v0.3.0
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
