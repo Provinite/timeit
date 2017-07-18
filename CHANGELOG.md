@@ -1,4 +1,7 @@
-## v0.3.0 (07/18/2017
+## v0.3.1 (07/18/2017)
+- Improves styling on timers.
+
+## v0.3.0 (07/18/2017)
 - Implements timer autosave/load (autosave every 30 seconds, and on close) [GH-19]
 - Adds TimerDataStorageService [GH-18]
 - Adds LocalStorage service [GH-17]
