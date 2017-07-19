@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         for (const t of timers) {
             this.timers.push({id: i++, data: t});
         }
-        const t = this;
+        this.maxTimer = i;
         window.setInterval(this.saveFullState.bind(this), 1000);
     }
 
