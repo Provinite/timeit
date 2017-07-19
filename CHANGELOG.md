@@ -1,3 +1,6 @@
+## v0.3.2 (07/19/2017)
+- Fixes bug where timers could not be toggled after a re-load. [GH-20]
+
 ## v0.3.1 (07/18/2017)
 - Improves styling on timers.
 
